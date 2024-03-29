@@ -49,7 +49,8 @@ uploads/
 
 # Visual Studio Code
 # =========
-.vscode
+# .vscode
+# .vscode/!launch.json
 
 # Sublime editor
 # ==============
@@ -96,4 +97,4 @@ test_noco.db
 httpbin
 .run/test-debug.run.xml
 
-!launch.json
+noco.db
