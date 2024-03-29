@@ -54,9 +54,11 @@ export function useGlobalState(storageKey = 'nocodb-gui-v2'): State {
     return locale
   }, 'en' /** fallback locale */)
 
+  const Access=localStorage.getItem("ACCESS-TOKEN")?JSON.parse(localStorage.getItem("ACCESS-TOKEN")!):null
+
   /** State */
   const initialState: StoredState = {
-    token: null,
+    token:null,
     lang: preferredLanguage,
     darkMode: prefersDarkMode,
     filterAutoSave: true,
@@ -75,6 +77,10 @@ export function useGlobalState(storageKey = 'nocodb-gui-v2'): State {
 
   /** force turn off of dark mode, regardless of previously stored settings */
   storage.value.darkMode = false
+
+  if(Access?.value){
+    storage.value.token=Access?.value
+  }
 
   /** current token ref, used by `useJwt` to reactively parse our token payload */
   const token = computed({
@@ -113,9 +119,13 @@ export function useGlobalState(storageKey = 'nocodb-gui-v2'): State {
     dashboardPath: '/dashboard',
     inviteOnlySignup: false,
   })
-
+  
   /** reactive token payload */
   const { payload } = useJwt<JwtPayload & User>(token)
+
+  if(Access?.expire&&payload?.value){
+    payload.value.exp=Access.expire
+  }
 
   /** currently running requests */
   const runningRequests = useCounter()

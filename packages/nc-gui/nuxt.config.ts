@@ -194,6 +194,9 @@ export default defineNuxtConfig({
       watch: {
         usePolling: true,
       },
+      proxy: {
+        "/user": "http://47.106.87.164:8551",
+      }
     },
     resolve: {
       alias: {

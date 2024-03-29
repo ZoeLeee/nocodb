@@ -97,6 +97,8 @@ export function addAxiosInterceptors(api: Api<any>) {
           // ignore
         })
       }
+      //TODO: 先不刷新token
+      return Promise.resolve(true)
 
       // Try request again with new token
       return axiosInstance

@@ -50,6 +50,8 @@ export function useGlobalActions(state: State): Actions {
 
   /** manually try to refresh token */
   const refreshToken = async () => {
+    //TODO: 先不刷新token
+    return Promise.resolve(true)
     const nuxtApp = useNuxtApp()
     const t = nuxtApp.vueApp.i18n.global.t
 

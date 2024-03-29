@@ -61,6 +61,7 @@ export const useGlobal = createGlobalState((): UseGlobalReturn => {
     { immediate: true },
   )
 
+  //TODO: 用户信息转化
   watch(
     state.jwtPayload,
     (nextPayload) => {
@@ -70,10 +71,14 @@ export const useGlobal = createGlobalState((): UseGlobalReturn => {
           ...(state.user.value?.id === nextPayload.id ? state.user.value || {} : {}),
           id: nextPayload.id,
           email: nextPayload.email,
-          firstname: nextPayload.firstname,
-          lastname: nextPayload.lastname,
-          roles: nextPayload.roles,
-          display_name: nextPayload.display_name,
+          firstname: nextPayload.realName,
+          lastname: nextPayload.realName,
+          roles: {
+            super:nextPayload.roleId===1,
+            creator:true,
+            "org-level-creator":true
+          },
+          display_name: nextPayload.realName,
         }
       }
     },

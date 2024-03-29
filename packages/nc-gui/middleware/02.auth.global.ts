@@ -68,11 +68,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       if (query.continueAfterSignIn) {
         localStorage.setItem('continueAfterSignIn', query.continueAfterSignIn)
       }
-
-      return navigateTo({
-        path: '/signup',
-        query,
-      })
+      //TODO: 跳转
+      window.location.href = '/user/web/user/login' + '?redirect=' + encodeURIComponent(window.location.href)
+      return
     }
 
     /** try generating access token using refresh token */

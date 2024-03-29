@@ -19,7 +19,7 @@ export class GlobalGuard extends AuthGuard(['jwt']) {
 
     if (req.headers?.['xc-auth']) {
       try {
-        result = await this.extractBoolVal(super.canActivate(context));
+        result =await this.extractBoolVal(super.canActivate(context));
       } catch (e) {
         console.log(e);
       }
