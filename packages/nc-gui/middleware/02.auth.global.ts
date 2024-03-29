@@ -78,6 +78,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     /** if user is still not signed in, redirect to signin page */
     if (!state.signedIn.value) {
+      //TODO: 跳转
+      return (window.location.href = '/user/web/user/login' + '?redirect=' + encodeURIComponent(window.location.href))
       return navigateTo({
         path: '/signin',
         query: to.fullPath !== '/' && to.fullPath.match(/^\/(?!\?)/) ? { continueAfterSignIn: to.fullPath } : {},
